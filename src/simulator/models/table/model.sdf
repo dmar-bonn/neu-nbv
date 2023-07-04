@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name="table">
+    <static>true</static>
+    <link name="link">
+      <visual name="visual">
+        <pose>0.25 0.2 0.1 1.570796 0 -1.570796</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://table/models/model_normalized.obj</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>

@@ -3,10 +3,7 @@
 Liren Jin, Xieyuanli Chen, Julius Rückin, Marija Popovic<br>
 University of Bonn
 
-This repository contains the implementation of our paper "NeU-NBV: Next Best View Planning Using Uncertainty Estimation in Image-Based Neural Rendering" submitted to IROS2023 (under review).
-
-![Teaser](media/images/teaser.png)
-
+This repository contains the implementation of our paper "NeU-NBV: Next Best View Planning Using Uncertainty Estimation in Image-Based Neural Rendering" accepted to IROS2023.
 
 ## Abstract
 
@@ -15,11 +12,83 @@ Autonomous robotic tasks require actively perceiving the environment to achieve 
 An overview of our NBV planning framework:
 ![Framework](media/images/framework.png)
 
-## Environment Setup
 ## Dataset
+- Download DTU dataset and Shapenet dataset from (available soon) to src/neural_rendering/data/dataset folder.
+
+## Environment Setup
+Clone the repo to your local. We use docker to make deployment in your machine easier.
+1. Build docker image
+    ```commandline
+    cd neu-nbv
+    docker build . -t neu-nbv:v1
+    ```
+2. To use gpu in docker container (docker-compose-gpu.yaml), follow [nvidia-run-time support](https://nvidia.github.io/nvidia-container-runtime/).
+
+3. For network training, you can either activate conda environment or start a docker container.
+ - In conda environment
+    ```commandline
+    conda env create -f environment.yaml
+    conda activate neu-nbv
+    ```
+ - In docker container
+    ```commandline
+    make training
+    ```
+Then follow Network Training section.
+
 ## Network Training
-## Network Evaluation
+For starting training process,
+```commandline
+cd scripts/neural_rendering
+```
+```commandline
+python train.py -M <model name> --setup_cfg_path <path to training setup file>
+```
+Continue training:
+```commandline
+python train.py -M <model name> --setup_cfg_path <path to training setup file> --resume
+```
+Visualize training progress via:
+``` commandline
+tensorboard --logdir <project dir>/logs/<model name>
+```
+
+We also provide two pretrained models trained on DTU and Shapenet data, you can download them from (available soon). copy these folder to neural_rendering/logs.
 ## Planning Experiments
+### On DTU dataset
+either use conda environment or docker container. 
+```commandline
+cd scripts
+python planning/dtu_experiment.py -M <model name>
+```
+### In Simulator
+We first need to set MODEL_NAME (car or indoor). 
+```commandline
+make up
+export MODEL_NAME=<model name>
+make simulator
+```
+Before starting experiments, we run random planner to get 200 test views. To generate test data, in a new terminal,
+```commandline
+make planning 
+cd scripts
+python planning/simulator_planning -P <planner type> -BG 200
+```
+We can start planning experiments in simulator, 
+```commandline
+python planning/simulator_experiment -M <model name> -test_data_path <path to test data>
+```
+Shut dowm containers,
+```commandline
+make down
+```
+
+## Plot Results
+```commandline
+cd scripts
+python utils/plot.py --dataframe_path <path to the dataframe>
+```
+
 ## Acknowledgements
 Parts of the code were based on [pixelNeRF](https://github.com/sxyu/pixel-nerf.git) and [NeuralMVS](https://github.com/AIS-Bonn/neural_mvs.git).
 

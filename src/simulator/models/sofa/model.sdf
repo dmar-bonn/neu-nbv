@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name="sofa">
+    <static>true</static>
+    <link name="link">
+      <visual name="visual">
+        <pose>-0.4 0 0.23 1.570796 0 -1.570796</pose>
+        <geometry>
+          <mesh>
+            <scale>2 2 2</scale>
+            <uri>model://sofa/models/model_normalized.obj</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>

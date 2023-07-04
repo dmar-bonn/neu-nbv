@@ -1,0 +1,12 @@
+<launch>
+  <arg name="camera_type" default="rgbd_camera" />
+
+  <env name="GAZEBO_MODEL_PATH" value="$(find simulator)/models" />
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find simulator)/worlds/car.world"/>
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+  </include>
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-file $(find simulator)/urdf/$(arg camera_type).urdf -urdf -model $(arg camera_type) -x -2 -z 0.05"/>
+</launch>

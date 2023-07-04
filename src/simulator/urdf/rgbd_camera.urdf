@@ -1,0 +1,95 @@
+<?xml version="1.0" ?>
+<robot name="camera" xmlns:body="http://playerstage.sourceforge.net/gazebo/xmlschema/#body" xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller" xmlns:geom="http://playerstage.sourceforge.net/gazebo/xmlschema/#geom"  xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor" xmlns:xacro="http://ros.org/wiki/xacro">
+  <link name="camera_base">
+    <inertial>
+      <mass value="1"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.05 0.15 0.1"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  <link name="camera_link">
+    <inertial>
+      <mass value="1"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 1.5708 0"/>
+      <geometry>
+        <cylinder length="0.005" radius="0.025"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="fixed_joint" type="fixed">
+    <origin xyz="-0.0275 0 0" rpy="0 0 0"/>
+    <parent link="camera_link"/>
+    <child link="camera_base"/>
+  </joint>
+
+  <gazebo reference="camera_link">
+    <material>Gazebo/Red</material>
+  </gazebo>
+  
+  <gazebo reference="camera_base">
+    <material>Gazebo/Blue</material>
+  </gazebo>
+
+  <gazebo reference="camera_link">
+    <sensor name="rgbd_camera" type="depth">
+      <update_rate>20</update_rate>
+      <camera>
+        <image>
+          <width>400</width>
+          <height>400</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.05</near>
+          <far>5</far>
+        </clip>
+        <lens>
+          <intrinsics>
+            <fx>400</fx>
+            <fy>400</fy>
+            <cx>200.5</cx>
+            <cy>200.5</cy>
+            <s>0</s>
+          </intrinsics>
+        </lens>
+      </camera>
+      <plugin name="camera_link_controller" filename="libgazebo_ros_openni_kinect.so">
+        <baseline>0.2</baseline>
+        <alwaysOn>true</alwaysOn>
+        <updateRate>1.0</updateRate>
+        <cameraName>rgbd_camera</cameraName>
+        <imageTopicName>rgb_image_raw</imageTopicName>
+        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+        <depthImageTopicName>depth_image_raw</depthImageTopicName>
+        <depthImageInfoTopicName>depth_camera_info</depthImageInfoTopicName>
+        <pointCloudTopicName>/point_cloud</pointCloudTopicName>
+        <frameName>camera_link</frameName>
+        <pointCloudCutoff>0.05</pointCloudCutoff>
+        <pointCloudCutoffMax>10</pointCloudCutoffMax>
+        <distortionK1>0.0</distortionK1>
+        <distortionK2>0.0</distortionK2>
+        <distortionK3>0.0</distortionK3>
+        <distortionT1>0.0</distortionT1>
+        <distortionT2>0.0</distortionT2>
+        <!--CxPrime>0</CxPrime-->
+        <Cx>200.5</Cx>
+        <Cy>200.5</Cy>
+        <focalLength>400</focalLength>
+        <hackBaseline>0</hackBaseline>
+      </plugin>
+    </sensor>
+    <turnGravityOff>true</turnGravityOff>
+  </gazebo>
+</robot>

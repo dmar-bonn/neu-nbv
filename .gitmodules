@@ -1,0 +1,3 @@
+[submodule "scripts/neural_rendering"]
+	path = scripts/neural_rendering
+	url = git@github.com:liren-jin/neural_rendering.git

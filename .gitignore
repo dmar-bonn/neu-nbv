@@ -1,0 +1,27 @@
+# Editors
+.vscode/
+.idea/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.swp
+
+# Custom
+.env
+*.csv
+*.jpg
+*.png
+*.npy
+*.json
+records/
+experiments/
+
+# ROS workspace
+.catkin_tools/
+build/
+devel/
+
+
+

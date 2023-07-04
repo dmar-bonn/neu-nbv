@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+  ros_master:
+    image: ros:noetic
+    container_name: ros_master
+    networks:
+      - neu_nbv_network
+    restart: always
+    command: stdbuf -o L roscore
+
+  neu_nbv_container:
+    image: neu-nbv:v1
+    container_name: neu_nbv_container
+    depends_on:
+      - ros_master
+    tty: true
+    networks:
+      - neu_nbv_network
+    volumes:
+      - ./scripts:/neu_nbv/scripts:rw
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - /tmp/.docker.xauth:/tmp/.docker.xauth:rw
+    environment:
+      - ROS_MASTER_URI=http://ros_master:11311
+      - PYTHONUNBUFFERED=1
+      - DISPLAY=unix${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+
+networks:
+  neu_nbv_network:
+    driver: bridge

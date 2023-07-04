@@ -1,0 +1,18 @@
+###### configuration for random_planner ######
+action_space:
+  min_height: 0.3
+  radius: 2
+
+simulation_bridge:
+  camera_type: rgbd_camera
+  sensor_noise: 2 # std of rgb measurment
+
+scene_range: [0.1, 4]
+initial_num: 1
+# step_phi: 0.5
+# step_theta: 0.5
+planning_type: local
+view_change: 1.05
+num_candidates: 50
+random_distance: false
+initial_type: random

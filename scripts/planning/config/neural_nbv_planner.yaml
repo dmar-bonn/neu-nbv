@@ -1,0 +1,33 @@
+###### configuration for neural_nbv_planner ######
+config_path: neural_rendering/logs/shapenet_training/training_setup.yaml
+checkpoint_path: neural_rendering/logs/shapenet_training/checkpoints/best.ckpt
+
+action_space:
+  min_height: 0.3
+  radius: 2
+simulation_bridge:
+  camera_type: rgbd_camera
+  sensor_noise: 2 # std of rgb measurment
+render_info:
+  # render related parameters
+  ref_image_resolution: [200, 200]
+  render_scale: 0.3
+  point_batch_size: 12000
+  scene_range: [0.1, 4.0]
+
+uncertainty_threshold: 0.1
+num_candidates: 50
+render_batch_size: 10
+use_hierachical_sampling: false
+sample_type: local
+sample_ratio: 0.2
+top_k: 4
+view_change: 1.05
+local_view_change: 0.3
+# step_phi: 1.0
+# step_theta: 1.0
+
+selection_range: 2.0
+reward_type: uncertainty
+maximal_ref: 5
+initial_type: random

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+    <model name='ground'>
+      <link name='ground'>
+        <visual name="visual">
+            <pose>0 0 0 0 0 0</pose>
+            <geometry>
+              <plane>
+                <normal>0 0 1</normal>
+                <size>10 10</size>
+              </plane>
+            </geometry>
+            <!--material>
+              <script>
+                <uri>model://ground/materials/scripts/</uri>
+                <uri>model://ground/materials/textures/</uri>
+                <name>CheckerBoard/Image</name>
+              </script>
+            </material-->
+        </visual>
+      </link>
+      <static>1</static>
+    </model>
+</sdf>
