@@ -3,7 +3,7 @@
 Liren Jin, Xieyuanli Chen, Julius Rückin, Marija Popovic<br>
 University of Bonn
 
-This repository contains the implementation of our paper "NeU-NBV: Next Best View Planning Using Uncertainty Estimation in Image-Based Neural Rendering" accepted to IROS2023.
+This repository contains the implementation of our paper "NeU-NBV: Next Best View Planning Using Uncertainty Estimation in Image-Based Neural Rendering" accepted to IROS 2023.
 
 ## Abstract
 
@@ -13,16 +13,17 @@ An overview of our NBV planning framework:
 ![Framework](media/images/framework.png)
 
 ## Dataset
-- Download DTU dataset and Shapenet dataset from (available soon) to src/neural_rendering/data/dataset folder.
+- Download [DTU dataset](https://phenoroam.phenorob.de/file-uploader/download/public/953455041-dtu_dataset.zip) and [Shapenet](https://phenoroam.phenorob.de/file-uploader/download/public/731944960-shapenet.zip) dataset to scripts/neural_rendering/data/dataset folder.
 
 ## Environment Setup
-Clone the repo to your local. We use docker to make deployment in your machine easier.
+Clone the repo to your local. We use docker to make deployment in your machine easier (hopefully). Note that for training and planning experiments on DTU dataset, docker is not necessary, you can also just use conda environment.
+
 1. Build docker image
     ```commandline
     cd neu-nbv
     docker build . -t neu-nbv:v1
     ```
-2. To use gpu in docker container (docker-compose-gpu.yaml), follow [nvidia-run-time support](https://nvidia.github.io/nvidia-container-runtime/).
+2. To use gpu in docker container (docker-compose-gpu.yaml), follow [nvidia-run-time support](https://nvidia.github.io/nvidia-container-runtime/) to set up runtime support.
 
 3. For network training, you can either activate conda environment or start a docker container.
  - In conda environment
@@ -32,6 +33,7 @@ Clone the repo to your local. We use docker to make deployment in your machine e
     ```
  - In docker container
     ```commandline
+    make up
     make training
     ```
 Then follow Network Training section.
@@ -53,16 +55,17 @@ Visualize training progress via:
 tensorboard --logdir <project dir>/logs/<model name>
 ```
 
-We also provide two pretrained models trained on DTU and Shapenet data, you can download them from (available soon). copy these folder to neural_rendering/logs.
+We also provide two pretrained models trained on [DTU](https://phenoroam.phenorob.de/file-uploader/download/public/195880506-dtu_training.zip) and [Shapenet](https://phenoroam.phenorob.de/file-uploader/download/public/196062945-shapenet_training.zip). Copy these folder to scripts/neural_rendering/logs.
+
 ## Planning Experiments
 ### On DTU dataset
-either use conda environment or docker container. 
+Either use conda environment or docker container. 
 ```commandline
 cd scripts
 python planning/dtu_experiment.py -M <model name>
 ```
 ### In Simulator
-We first need to set MODEL_NAME (car or indoor). 
+We first need to set MODEL_NAME to choose which model we spawn in our simulator, currently only "car" and "indoor" are supported. 
 ```commandline
 make up
 export MODEL_NAME=<model name>
@@ -72,7 +75,7 @@ Before starting experiments, we run random planner to get 200 test views. To gen
 ```commandline
 make planning 
 cd scripts
-python planning/simulator_planning -P <planner type> -BG 200
+python planning/simulator_planning -P random -BG 200
 ```
 We can start planning experiments in simulator, 
 ```commandline
