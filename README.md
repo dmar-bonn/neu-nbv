@@ -95,6 +95,18 @@ python utils/plot.py --dataframe_path <path to the dataframe>
 ## Acknowledgements
 Parts of the code were based on [pixelNeRF](https://github.com/sxyu/pixel-nerf.git) and [NeuralMVS](https://github.com/AIS-Bonn/neural_mvs.git).
 
+## Maintainer
+Liren Jin, ljin@uni-bonn.de
+
+## Citation
+`@INPROCEEDINGS{jin2023neunbv,
+      title={NeU-NBV: Next Best View Planning Using Uncertainty Estimation in Image-Based Neural Rendering}, 
+      booktitle={2023 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)}, 
+      author={Liren Jin and Xieyuanli Chen and Julius Rückin and Marija Popović},
+      year={2023},
+}``commandline
+```
+
 
 ## Project Funding
 This work has been fully funded by the Deutsche Forschungsgemeinschaft (DFG, German Research Foundation) under Germany’s Excellence Strategy, EXC-2070 – 390732324 (PhenoRob) and supported by the NVIDIA Academic Hardware Grant Program. All authors are with the Institute of Geodesy and Geoinformation, University of Bonn.
