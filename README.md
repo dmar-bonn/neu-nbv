@@ -103,8 +103,10 @@ Liren Jin, ljin@uni-bonn.de
 @INPROCEEDINGS{jin2023neunbv,
       title={NeU-NBV: Next Best View Planning Using Uncertainty Estimation in Image-Based Neural Rendering}, 
       booktitle={2023 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)}, 
-      author={Liren Jin and Xieyuanli Chen and Julius Rückin and Marija Popović},
-      year={2023}}
+      author={Jin, Liren and Chen, Xieyuanli and Rückin, Julius and Popović, Marija},
+      pages={11305-11312},
+      year={2023},
+      doi={10.1109/IROS55552.2023.10342226}}
 ```
 
 ## Project Funding
