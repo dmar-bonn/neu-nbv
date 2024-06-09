@@ -27,7 +27,12 @@ An overview of our NBV planning framework:
 - Download [DTU dataset](https://phenoroam.phenorob.de/file-uploader/download/public/953455041-dtu_dataset.zip) and [Shapenet](https://phenoroam.phenorob.de/file-uploader/download/public/731944960-shapenet.zip) dataset to scripts/neural_rendering/data/dataset folder.
 
 ## Environment Setup
-Clone the repo to your local. We use docker to make deployment in your machine easier (hopefully). Note that for training and planning experiments on DTU dataset, docker is not necessary, you can also just use conda environment.
+Clone the repo to your local
+```commandline
+git clone git@github.com:dmar-bonn/neu-nbv.git --recursive
+```
+    
+We use docker to make deployment in your machine easier (hopefully). Note that for training and planning experiments on DTU dataset, docker is not necessary, you can also just use conda environment.
 
 1. Build docker image
     ```commandline
